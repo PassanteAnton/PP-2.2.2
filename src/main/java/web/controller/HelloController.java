@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.Car;
+import web.service.CarService;
 
 import javax.sql.rowset.CachedRowSet;
 import java.util.ArrayList;
@@ -24,20 +25,4 @@ public class HelloController {
 		model.addAttribute("messages", messages);
 		return "index";
 	}
-
-	@GetMapping(value = "/cars")
-	public String getCars(ModelMap model,
-						  @RequestParam(defaultValue = "5") int count){
-		List<Car> cars = new ArrayList<>();
-		cars.add(new Car("Honda", "Civic", 120));
-		cars.add(new Car("Renault", "logan", 75));
-		cars.add(new Car("Kia", "Rio", 98));
-		cars.add(new Car("Volvo", "S40", 125));
-		cars.add(new Car("MB", "e250", 225));
-		System.out.println(count);
-		if(count > 5 ) count = 5;
-		model.addAttribute("cars", cars.subList(0, count));
-		return "cars";
-	}
-	
 }
